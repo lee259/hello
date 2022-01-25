@@ -18,7 +18,9 @@
 
 <script>
 import Vue from "vue";
+import {postCount} from '@/api/api/login'
 import { Button } from "vant";
+
 
 Vue.use(Button);
 export default {
@@ -37,8 +39,14 @@ export default {
     },
     btnClick() {
       this.isLoading = true;
+      this.postCount(this.inputValue)
       this.$router.push("/goodList");
     },
+    postCount(inputValue){
+      postCount(inputValue).then(res =>{
+        console.log(res);
+      })
+    }
   },
 };
 </script>
