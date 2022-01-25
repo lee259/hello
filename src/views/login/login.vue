@@ -1,0 +1,53 @@
+<template>
+  <div class="login">
+    <input
+      type="number"
+      class="input"
+      @input="inputClick"
+      v-model="inputValue"
+    />
+    <van-button
+      :disabled="isDisabled"
+      type="primary"
+      :loading="isLoading"
+      @click="btnClick"
+      >禁用状态</van-button
+    >
+  </div>
+</template>
+
+<script>
+import Vue from "vue";
+import { Button } from "vant";
+
+Vue.use(Button);
+export default {
+  data() {
+    return {
+      inputValue: 0,
+      isDisabled: true,
+      isLoading: false,
+    };
+  },
+  methods: {
+    inputClick() {
+      if (this.inputValue.length > 8) {
+        this.isDisabled = false;
+      }
+    },
+    btnClick() {
+      this.isLoading = true;
+      this.$router.push("/goodList");
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+@media screen and(min-width:750px) {
+  @import url("./index-p.less");
+}
+@media screen and(max-width:400px) {
+  @import url("./index-m.less");
+}
+</style>
