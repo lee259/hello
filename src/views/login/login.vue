@@ -5,6 +5,7 @@
       class="input"
       @input="inputClick"
       v-model="inputValue"
+      placeholder="请输入账号"
     />
     <van-button
       :disabled="isDisabled"
@@ -26,7 +27,7 @@ Vue.use(Button);
 export default {
   data() {
     return {
-      inputValue: 0,
+      inputValue: '',
       isDisabled: true,
       isLoading: false,
     };
