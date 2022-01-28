@@ -1,13 +1,14 @@
 <template>
   <div class="goodlist">
-    <van-nav-bar title="标题"/>
+    <van-nav-bar :title="title"/>
     <van-checkbox-group v-model="result" ref="checkboxGroup">
     <van-cell-group>
     <van-cell
       v-for="(item, index) in list"
       clickable
-      :key="item"
-      :title="`复选框 ${item}`"
+      :key="item.id"
+      :title="`${item.id}.${item.name}`"
+      :value="`￥${item.money}`"
       @click="toggle(index)"
     >
       <template #right-icon>
@@ -28,6 +29,7 @@ import { NavBar } from 'vant';
 import { Checkbox, CheckboxGroup } from 'vant';
 import { Cell, CellGroup } from 'vant';
 import { SubmitBar } from 'vant';
+import {getGoodList} from '@/api/api/goodlist'
 
 Vue.use(SubmitBar);
 Vue.use(Cell);
@@ -38,11 +40,11 @@ Vue.use(NavBar);
 export default {
   data() {
     return {
-      list: ['a', 'b'],
+      list: [],
       result: [],
-      price:[2000,3000],
       checked:false,
       total:0,
+      title:''
     };
   },
   methods: {
@@ -54,26 +56,38 @@ export default {
     },
     onSubmit(){
 
+    },
+    getGoodList(){
+      getGoodList().then(res=>{
+        this.list = res.data
+      })
     }
   },
   computed:{
     totlaPrice(){
       let sum = 0
       for(let i = 0; i < this.result.length; i++){
-        sum += this.price[i]
+        sum += this.result[i].money
       }
-      return sum
+      return sum*100
     }
-  }
+  },
+  created() {
+    this.getGoodList()
+    this.title = Object.values(this.$route.query).reduce((preValue,currentValue) =>{
+      return preValue  + currentValue
+    })
+  },
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 @media screen and(min-width:750px) {
   @import url("./index-p.less");
 }
-@media screen and(max-width:360) {
+@media screen and(max-width:400px) {
   @import url("./index-m.less");
 }
-
 </style>
+
+

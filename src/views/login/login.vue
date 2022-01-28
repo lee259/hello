@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <input
-      type="number"
+      type="text"
       class="input"
       @input="inputClick"
       v-model="inputValue"
@@ -12,8 +12,9 @@
       type="primary"
       :loading="isLoading"
       @click="btnClick"
-      >禁用状态</van-button
+      >登录</van-button
     >
+    <van-popup v-model="show">您的账号输入错误</van-popup>
   </div>
 </template>
 
@@ -21,8 +22,9 @@
 import Vue from "vue";
 import {postCount} from '@/api/api/login'
 import { Button } from "vant";
+import { Popup } from 'vant';
 
-
+Vue.use(Popup);
 Vue.use(Button);
 export default {
   data() {
@@ -30,6 +32,7 @@ export default {
       inputValue: '',
       isDisabled: true,
       isLoading: false,
+      show:false
     };
   },
   methods: {
@@ -41,11 +44,19 @@ export default {
     btnClick() {
       this.isLoading = true;
       this.postCount(this.inputValue)
-      this.$router.push("/goodList");
     },
     postCount(inputValue){
       postCount(inputValue).then(res =>{
-        console.log(res);
+        let username = res.data
+        if(res.code !=200){
+          this.show = true
+          this.isLoading = false
+        }else{
+          setTimeout(()=>{
+            this.$router.push({path:"/goodList",
+                               query:username});
+          },5000)
+        }
       })
     }
   },

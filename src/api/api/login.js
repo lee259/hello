@@ -1,10 +1,12 @@
 import { request } from "../request";
 
-export function postCount(id) {
+export function postCount(username) {
   return request({
-    url: '/home/multidata',
-    params: {
-      id
+    url: '/Verify',
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json;charset=utf-8',
+      'username': username
     }
   })
 }
