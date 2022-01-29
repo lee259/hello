@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     inputClick() {
-      if (this.inputValue.length > 8) {
+      if (19 < this.inputValue.length > 7) {
         this.isDisabled = false;
       }
     },

@@ -3,7 +3,7 @@ import axios from 'axios'
 export function request(config) {
   // 1.创建axios的实例
   const instance = axios.create({
-    baseURL: 'api',
+    baseURL: 'http://user.wglink.com.cn',
     timeout: 5000
   })
 
@@ -12,7 +12,7 @@ export function request(config) {
   instance.interceptors.request.use(config => {
     return config
   }, err => {
-    // console.log(err);
+    console.log(err);
   })
 
   // 2.2.响应拦截
