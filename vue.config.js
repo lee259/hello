@@ -20,7 +20,7 @@ module.exports = {
     hotOnly: true, // 是否热更新
     proxy: {
       '/api': { // 路径中有 /api 的请求都会走这个代理
-        target: 'http://106.54.165.210:9000/PluginWeb', // 要访问的接口域名
+        target: 'http://user.wglink.com.cn/', // 要访问的接口域名
         ws: true, // 是否启用  websockets
         // secure: false,
         changeOrigin: true,

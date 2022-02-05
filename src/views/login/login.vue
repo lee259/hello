@@ -36,8 +36,10 @@ export default {
   },
   methods: {
     inputClick() {
-      if (19 < this.inputValue.length > 7) {
+      if (this.inputValue.length > 7) {
         this.isDisabled = false;
+      }else{
+        this.isDisabled = true;
       }
     },
     btnClick() {
@@ -50,11 +52,9 @@ export default {
         if(res.code !=200){
           Toast('您的账号输入有误');
           this.isLoading = false
-        }else{
-          setTimeout(()=>{
-            this.$router.push({path:"/goodList",
-                               query:username});
-          },5000)
+        }else{    
+            this.$router.push({path:"/goodList"});
+            localStorage.setItem('username',username)
         }
       })
     }

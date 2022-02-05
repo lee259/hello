@@ -3,7 +3,7 @@ import axios from 'axios'
 export function request(config) {
   // 1.创建axios的实例
   const instance = axios.create({
-    baseURL: 'http://user.wglink.com.cn',
+    baseURL: 'api',
     timeout: 5000
   })
 

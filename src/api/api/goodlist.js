@@ -6,3 +6,10 @@ export function getGoodList() {
     method: 'POST',
   })
 }
+export function wxPay(message) {
+  return request({
+    url: 'pay/createOrder',
+    method: 'POST',
+    data: message
+  })
+}
