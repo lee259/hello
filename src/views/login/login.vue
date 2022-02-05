@@ -14,7 +14,6 @@
       @click="btnClick"
       >登录</van-button
     >
-    
   </div>
 </template>
 
